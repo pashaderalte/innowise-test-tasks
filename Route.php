@@ -19,12 +19,14 @@ class Route extends Field
         $this->finishCoordinates = $finishCoordinates;
     }
 
-    //PAGE 146
     //TODO Check implementation of this shit
     public function bfsSearch (): void
     {
         $searchQueue = new Deque();
-        $searchQueue += Field::$fieldGraph[$this->startCoordinates]; //CHECK IMPLEMENTATION!!!
+        $graphObj = new Field($this->xLength, $this->yLength);
+        $graphObj->fieldToGraph();
+        $graph = $graphObj->fieldGraph;
+        $searchQueue += $graph[$this->startCoordinates[0]][$this->startCoordinates[1]]; //CHECK IMPLEMENTATION!!!
         $searched = [];
 
         while ($searchQueue)
@@ -33,14 +35,14 @@ class Route extends Field
 
             if (!in_array($vertex, $searched))
             {
-                if ($vertex == $this->finishCoordinates)
+                if ($vertex[0] == $this->finishCoordinates[0] && $vertex[1] == $this->finishCoordinates[1])
                 {
                     $this->searchResult = $searched; //NOT SURE!!!
                     break;
                 }
                 else
                 {
-                    $searchQueue += Field::$fieldGraph[$vertex]; //ALSO CHECK THIS SHIT!!!
+                    $searchQueue += $graph[$vertex]; //ALSO CHECK THIS SHIT!!!
                     $searched[] = $vertex;
                 }
             }

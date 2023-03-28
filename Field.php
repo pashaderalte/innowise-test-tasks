@@ -32,23 +32,82 @@ class Field
         $this->field = $fieldValues;
     }
 
-    //TODO Create correct graph implementation; Assume what should be vertex: value or coordinate
+    //Graph stores values of field cells: 0 or 1
     public function fieldToGraph (): void
     {
         for ($yCoordinate = 0; $yCoordinate <= sizeof($this->field); $yCoordinate++)
         {
             for ($xCoordinate = 0; $xCoordinate <= sizeof($this->field[0]); $xCoordinate++)
             {
-                if (!($xCoordinate == array_key_first($this->field[0])
-                && $xCoordinate == array_key_last($this->field[0])
-                && $yCoordinate == array_key_first($this->field)
-                && $yCoordinate == array_key_last($this->field)))
+                switch (true)
                 {
+                    case ($xCoordinate == 0 && $yCoordinate == 0):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1],
+                        ];
+                        break;
 
-                }
-                else
-                {
-                    $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]];
+                    case ($xCoordinate == 0 && $yCoordinate > 0):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
+                        break;
+
+                    case ($xCoordinate > 0 && $yCoordinate == 0):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate ],
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1]
+                        ];
+                        break;
+
+                    case ($xCoordinate == array_key_last($this->field[0]) && $yCoordinate == array_key_last($this->field)):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
+                        break;
+
+                    case ($xCoordinate == array_key_last($this->field[0]) && $yCoordinate < array_key_last($this->field)):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
+                        break;
+
+                    case ($xCoordinate < array_key_last($this->field[0]) && $yCoordinate == array_key_last($this->field)):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate],
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
+                        break;
+
+                    case ($xCoordinate == 0 && $yCoordinate == array_key_last($this->field)):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
+                        break;
+
+                    case ($xCoordinate == array_key_last($this->field[0]) && $yCoordinate == 0):
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1],
+                        ];
+                        break;
+
+                    default:
+                        $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]] = [
+                            $this->field[$xCoordinate + 1][$yCoordinate],
+                            $this->field[$xCoordinate - 1][$yCoordinate],
+                            $this->field[$xCoordinate][$yCoordinate + 1],
+                            $this->field[$xCoordinate][$yCoordinate - 1],
+                        ];
                 }
             }
         }
