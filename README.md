@@ -21,3 +21,11 @@ A program that generates a 10x10 field and finds the shortest path from point A 
   - Copy/delete: *copy()*, *delete()*
 - What is serialization?
   - Serialization encodes objects into another format. Basically, to store an object in readable form for further usage. 
+
+## BASIC DOCS FOR A TASK:
+
+- *task-11.php* is an entry point.
+- **Field::class** accepts size of field. Generates field based on random values or user-input values. Convert general two-dimensional array into connected graph *(!!! GRAPH CONVERSION STILL IN WORK)*
+- **Route::class** accepts size of field, start and end points. Performs basic bfs search through the graph that was generated in its parent **Field::class**
+- **Storage::class** serializes and unserializes objects, write into / read from file in specific directory. Generates the name of the files based on user input and current datetime for more convenient further use. 
+

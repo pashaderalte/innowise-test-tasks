@@ -14,6 +14,7 @@ class Field
 
     }
 
+    //generates field based on random
     public function generateOnRandom (): void
     {
         for ($yCoordinate = 0; $yCoordinate <= $this->yLength; $yCoordinate++)
@@ -25,6 +26,7 @@ class Field
         }
     }
 
+    //generates field based on given $fieldValues
     public function generateOnInput (array $fieldValues): void
     {
         $this->field = $fieldValues;
@@ -46,7 +48,7 @@ class Field
                 }
                 else
                 {
-                    $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]]
+                    $this->fieldGraph[$this->field[$xCoordinate][$yCoordinate]];
                 }
             }
         }
