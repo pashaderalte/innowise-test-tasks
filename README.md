@@ -14,4 +14,10 @@ You need to generate a field (10x10 or other), output with the field and with th
 
 A program that generates a 10x10 field and finds the shortest path from point A to point B.
 
-**Questions**: What methods are available for working with files? What is serialization?
+**Questions**: 
+- What methods are available for working with files? 
+  - General functions to work with files: *fopen()*, *fclose()*, *file()*, *file_exists()*, *file_put_contents()*
+  - Edit rights like in Unix-based systems: *chgrp()*, *chown()*, *chmod()* 
+  - Copy/delete: *copy()*, *delete()*
+- What is serialization?
+  - Serialization encodes objects into another format. Basically, to store an object in readable form for further usage. 
