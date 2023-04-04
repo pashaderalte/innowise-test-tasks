@@ -1,17 +1,12 @@
 <?php
 
-    function getBirthdayCountdown ( string $date ): int
+    function getBirthdayCountdown ( string $birthdayDate ): int
     {
-        $curYearBirthdayTimestamp = strtotime(substr($date, 0, -4) . date("Y"));
+        $curDate = new DateTime();
 
-        return ($curYearBirthdayTimestamp - time()) / (60 * 60 * 24) + 1;
-    }
+        $birthdayDate = DateTime::createFromFormat('d-m-Y', $birthdayDate);
 
-    function getBirthdayCountdownUsingDateTime ( string $date ): int
-    {
-        $curYearBirthdayString = substr($date, 0, -4) . date("Y");
+        $birthdayDate->setDate(2023, $birthdayDate->format('m'), $birthdayDate->format('d'));
 
-        $curYearBirthdayObject = DateTime::createFromFormat('d-m-Y', $curYearBirthdayString);
-
-        return $curYearBirthdayObject->diff(new DateTime())->d + 1;
+        return $curDate->diff($birthdayDate)->days;
     }
