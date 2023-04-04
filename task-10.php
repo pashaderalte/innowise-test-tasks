@@ -2,7 +2,7 @@
     class Calculator {
         private int $firstArgument;
         private int $secondArgument;
-        private int $tempValue;
+        private int $result = 0;
 
         public function __construct($firstArgument, $secondArgument)
         {
@@ -10,51 +10,56 @@
             $this->secondArgument = $secondArgument;
         }
 
-        public function add (): int
+        public function __toString()
         {
-            $this->tempValue = $this->firstArgument + $this->secondArgument;
-            return $this->tempValue;
+            return (string) $this->result;
         }
 
-        public function subtract (): int
+        public function add (): object
         {
-            $this->tempValue = $this->firstArgument - $this->secondArgument;
-            return $this->tempValue;
+            $this->result = $this->firstArgument + $this->secondArgument;
+            return $this;
         }
 
-        public function multiply (): int
+        public function subtract (): object
         {
-            $this->tempValue = $this->firstArgument * $this->secondArgument;
-            return $this->tempValue;
+            $this->result = $this->firstArgument - $this->secondArgument;
+            return $this;
         }
 
-        public function divide (): int
+        public function multiply (): object
         {
-            $this->tempValue = $this->firstArgument / $this->secondArgument;
-            return $this->tempValue;
+            $this->result = $this->firstArgument * $this->secondArgument;
+            return $this;
         }
 
-        public function addBy (int $summand): int
+        public function divide (): object
         {
-            $this->tempValue += $summand;
-            return $this->tempValue;
+            $this->result = $this->firstArgument / $this->secondArgument;
+            return $this;
         }
 
-        public function subtractBy (int $deductible): int
+        public function addBy (int $summand): object
         {
-            $this->tempValue -= $deductible;
-            return $this->tempValue;
+            $this->result += $summand;
+            return $this;
         }
 
-        public function multiplyBy (int $multiplier): int
+        public function subtractBy (int $deductible): object
         {
-            $this->tempValue *= $multiplier;
-            return $this->tempValue;
+            $this->result -= $deductible;
+            return $this;
         }
 
-        public function divideBy (int $divider): int
+        public function multiplyBy (int $multiplier): object
         {
-            $this->tempValue /= $divider;
-            return $this->tempValue;
+            $this->result *= $multiplier;
+            return $this;
+        }
+
+        public function divideBy (int $divider): object
+        {
+            $this->result /= $divider;
+            return $this;
         }
     }
