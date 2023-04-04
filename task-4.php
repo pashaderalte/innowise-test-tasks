@@ -1,11 +1,17 @@
 <?php
-
-    function safeRemove (array &$arr, int $position): array
+    function safeRemove (array $arr, int $position): array
     {
         unset($arr[$position]);
-        $result = $arr;
-        unset($arr);
+        $arrCopy = $arr;
+        $arr = [];
 
-        return $result;
+        foreach($arrCopy as $item)
+        {
+            $arr[] = $item;
+        }
+
+        unset($arrCopy);
+
+        return $arr;
     }
 
